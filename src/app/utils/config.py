@@ -8,3 +8,4 @@ DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./dados.db")
 JWT_SECRET = os.getenv("JWT_SECRET", "supersecret")
 
 """
+
