@@ -1,10 +1,13 @@
-from typing import Optional
+from typing import Dict, Optional, Union
 
-ROUTE_CONFIG = {
+ROUTER_CONFIG: Dict[
+    str,
+    Dict[str, Union[str, Optional[Dict[str, str]], range]]
+] = {
     "producao": {
         "option": "opt_02",
         "suboption": None,
-        "year": range(1970, 2023)
+        "year": range(1970, 2024)
     },
     "processamento": {
         "option": "opt_03",
@@ -14,12 +17,12 @@ ROUTE_CONFIG = {
             "uvas_de_mesa": "subopt_03",
             "sem_classificacao": "subopt_04",
         },
-        "year": range(1970, 2023)
+        "year": range(1970, 2024)
     },
     "comercializacao": {
         "option": "opt_04",
         "suboption": None,
-        "year": range(1970, 2023)
+        "year": range(1970, 2024)
     },
     "importacao": {
         "option": "opt_05",
@@ -30,7 +33,7 @@ ROUTE_CONFIG = {
             "uvas_passas": "subopt_04",
             "sucos_de_uva": "subopt_05",
         },
-        "year": range(1970, 2024)
+        "year": range(1970, 2025)
     },
     "exportacao": {
         "option": "opt_06",
@@ -40,6 +43,6 @@ ROUTE_CONFIG = {
             "uvas_frescas": "subopt_03",
             "sucos_de_uva": "subopt_04",
         },
-        "year": range(1970, 2024)
+        "year": range(1970, 2025)
     }
 }

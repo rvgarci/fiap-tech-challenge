@@ -1,11 +1,12 @@
 from typing import Optional
-from config_routers import ROUTE_CONFIG
+from app.utils.router_config import ROUTER_CONFIG
+
 
 def get_url(option: str, suboption: Optional[str], year: int) -> str:
-    if option not in ROUTE_CONFIG:
+    if option not in ROUTER_CONFIG:
         raise ValueError(f"Invalid option: '{option}'")
 
-    config = ROUTE_CONFIG[option]
+    config = ROUTER_CONFIG[option]
     opt_code = config["option"]
 
     # Validação do ano

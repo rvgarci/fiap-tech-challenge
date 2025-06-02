@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from services.production_scraper import get_production_data
+from app.services.scraper import get_production_data
 
 router = APIRouter(prefix="/embrapa")
 
