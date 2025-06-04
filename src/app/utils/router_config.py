@@ -1,14 +1,22 @@
-from typing import Dict, Optional, Union
+from typing import Dict, Optional, TypedDict, Union 
 
-ROUTER_CONFIG: Dict[
-    str,
-    Dict[str, Union[str, Optional[Dict[str, str]], range]]
-] = {
+class RouterOption(TypedDict):
+    option: str
+    suboption: Optional[Dict[str, str]]
+    year: range
+
+ROUTER_CONFIG: Dict[str, RouterOption] = {
+    # ------------------------
+    # Aba: Produção
+    # ------------------------
     "producao": {
         "option": "opt_02",
         "suboption": None,
         "year": range(1970, 2024)
     },
+    # ------------------------
+    # Aba: Processamento
+    # ------------------------
     "processamento": {
         "option": "opt_03",
         "suboption": {
@@ -19,11 +27,17 @@ ROUTER_CONFIG: Dict[
         },
         "year": range(1970, 2024)
     },
+    # ------------------------
+    # Aba: Comercialização
+    # ------------------------
     "comercializacao": {
         "option": "opt_04",
         "suboption": None,
         "year": range(1970, 2024)
     },
+    # ------------------------
+    # Aba: Importação
+    # ------------------------
     "importacao": {
         "option": "opt_05",
         "suboption": {
@@ -35,6 +49,9 @@ ROUTER_CONFIG: Dict[
         },
         "year": range(1970, 2025)
     },
+    # ------------------------
+    # Aba: Exportação
+    # ------------------------
     "exportacao": {
         "option": "opt_06",
         "suboption": {

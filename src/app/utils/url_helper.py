@@ -1,10 +1,23 @@
 from typing import Optional
-from app.utils.router_config import ROUTER_CONFIG
+from app.utils.router_config import ROUTER_CONFIG 
 
 
 def get_url(option: str, suboption: Optional[str], year: int) -> str:
+    """
+    Gera a URL de scraping para a aba da Embrapa conforme a opção, subopção e ano.
+
+    Args:
+        option: Nome da aba (ex: "produção", "exportação")
+        suboption: Subcategoria (ex: "vinhos de mesa")
+        year: Ano da consulta (ex: 2023)
+
+    Returns:
+        URL montada como string.
+    """
+    base_url = "http://vitibrasil.cnpuv.embrapa.br/index.php"
+
     if option not in ROUTER_CONFIG:
-        raise ValueError(f"Invalid option: '{option}'")
+        raise ValueError(f"Invalid option: {option}")
 
     config = ROUTER_CONFIG[option]
     opt_code = config["option"]
@@ -15,7 +28,7 @@ def get_url(option: str, suboption: Optional[str], year: int) -> str:
 
     # Se não houver subopções definidas
     if config["suboption"] is None:
-        return f"http://vitibrasil.cnpuv.embrapa.br/index.php?opcao={opt_code}&ano={year}"
+        return f"{base_url}?opcao={opt_code}&ano={year}"
 
     # Se houver subopções, mas não foi passado nenhuma
     if suboption is None:
@@ -27,4 +40,4 @@ def get_url(option: str, suboption: Optional[str], year: int) -> str:
         raise ValueError(f"Invalid suboption: '{suboption}' para a opção '{option}'")
 
     subopt_code = suboptions[suboption]
-    return f"http://vitibrasil.cnpuv.embrapa.br/index.php?opcao={opt_code}&subopcao={subopt_code}&ano={year}"
+    return f"{base_url}?opcao={opt_code}&subopcao={subopt_code}&ano={year}"

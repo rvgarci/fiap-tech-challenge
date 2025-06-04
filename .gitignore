@@ -1,3 +1,25 @@
-.backup
-.vscode
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Ambiente virtual
+.venv/
+
+# Configs locais
 .env
+.vscode/
+.backup
+
+# Database
+*.db
+
+# VS Code notebooks metadata
+.ipynb_checkpoints/
+
+# Poetry
+poetry.lock
+
+# Testes
+.coverage
+htmlcov/
