@@ -18,6 +18,7 @@ sqlmodel = "^0.0.24"
 annotated-types = "^0.7"
 charset-normalizer = "^3.4"
 python-dotenv = "^1.1"
+requests = "^2.32.3"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.0.0"
