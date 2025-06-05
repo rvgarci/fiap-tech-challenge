@@ -11,7 +11,7 @@ def fetch_table_data(option: str, suboption: Optional[str], year: int, model):
     response = requests.get(url)
     soup = BeautifulSoup(response.text, "html.parser")
     table = soup.find("table", class_="tb_base tb_dados")
-    return parse_table(table, model)
+    return parse_table(table, model, year)
 
 def get_production_data(option: str, suboption: Optional[str], year: int) -> List[schema.ProductionItem]:
     """Faz scraping da aba de Produção da Embrapa e retorna os dados como lista de ProductionItem."""

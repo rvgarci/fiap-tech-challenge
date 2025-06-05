@@ -2,17 +2,16 @@ from typing import List, Type
 from pydantic import BaseModel
 
 
-def parse_table(table, model: Type[BaseModel]) -> List[BaseModel]:
+def sanitize_numeric(text: str) -> str:
     """
-    Faz parsing de uma tabela HTML da Embrapa para uma lista de objetos Pydantic.
-
-    Args:
-        table: Objeto BeautifulSoup da tabela <table>.
-        model: Classe Pydantic com os campos correspondentes à tabela.
-
-    Returns:
-        Lista de instâncias validadas do modelo fornecido.
+    Limpa e normaliza valores numéricos para conversão segura.
+    Substitui símbolos como '*' ou strings vazias por '0'.
     """
+    text = text.strip().replace("-", "0").replace("*", "0").replace(".", "").replace(",", ".")
+    return text if text.replace(".", "").isdigit() else "0"
+
+
+def parse_table(table, model, ano=None) -> List[BaseModel]:
     data = []
     headers = list(model.model_fields)
     current_row = {}
@@ -31,30 +30,33 @@ def parse_table(table, model: Type[BaseModel]) -> List[BaseModel]:
 
         # Caso 1: Produção, Processamento e Comercialização
         if "tb_item" in cell_class or "tb_subitem" in cell_class:
-            # print("Use Case 1: [Produção, Processamento, Comercialização]")
-
             if "tb_item" in cell_class:
                 current_row[headers[0]] = cells[0].text.strip()
 
             elif "tb_subitem" in cell_class or len(cells) == len(headers):
                 item_data = current_row.copy()
                 for i, field in enumerate(headers[1:]):
-                    text = cells[i].text.strip() if i < len(cells) else "0"
-                    text = text.replace("-", "0").replace(".", "").replace(",", ".")
-                    item_data[field] = text
+                    raw = cells[i].text.strip() if i < len(cells) else "0"
+                    item_data[field] = sanitize_numeric(raw)
+
+                if "ano" in model.model_fields and ano is not None:
+                    item_data["ano"] = ano
+
                 try:
                     data.append(model(**item_data))
                 except Exception as e:
                     print(f"Erro ao criar modelo: {e} | dados: {item_data}")
 
-        # Caso 2: Importação e Exportação (td sem classe)
+        # Caso 2: Importação e Exportação
         elif not cell_class:
-            # print("Use Case 2: [Importação, Exportação]")
             item_data = {}
             for i, field in enumerate(headers):
-                text = cells[i].text.strip() if i < len(cells) else "0"
-                text = text.replace("-", "0").replace(".", "").replace(",", ".")
-                item_data[field] = text
+                raw = cells[i].text.strip() if i < len(cells) else "0"
+                item_data[field] = sanitize_numeric(raw)
+
+            if "ano" in model.model_fields and ano is not None:
+                item_data["ano"] = ano
+
             try:
                 data.append(model(**item_data))
             except Exception as e:
