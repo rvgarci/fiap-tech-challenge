@@ -1,5 +1,6 @@
 #!/bin/bash
-echo "▶️ Iniciando FastAPI + Streamlit..."
+set -e
+echo "▶️ Iniciando FastAPI + Streamlit ..."
 
 # Inicia o Uvicorn em segundo plano
 poetry run uvicorn src.app.main:app --reload --port 8000 &

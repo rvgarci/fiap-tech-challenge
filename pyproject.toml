@@ -23,17 +23,19 @@ psycopg2-binary = "^2.9.10"
 streamlit = "^1.45.1"
 plotly = "^6.1.2"
 matplotlib = "^3.10.3"
-dotenv = "^0.9.9"
 protobuf = "^6.31.1"
-google = "^3.0.0"
 blinker = "^1.9.0"
 chardet = "^5.2.0"
+# Removido dotenv e google
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.0.0"
 httpx = "^0.27.0"
 pytest-cov = "^6.1.1"
 alembic = "^1.16.1"
+black = "^24.3.0"
+flake8 = "^7.0.0"
+isort = "^5.13.2"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

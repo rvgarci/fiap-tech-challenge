@@ -1,6 +1,6 @@
 # Python cache
 **/__pycache__/
-**/*.pyc 
+**/*.pyc
 *.py[cod]
 *.pyo
 
@@ -14,13 +14,23 @@
 
 # Database
 *.db
+*.sqlite3
 
 # VS Code notebooks metadata
 .ipynb_checkpoints/
 
 # Poetry
-poetry.lock
+# poetry.lock  # Remova o comentário se quiser versionar o poetry.lock
 
 # Testes
 .coverage
 htmlcov/
+
+# Outros
+*.egg-info/
+*.log
+*.ipynb
+
+# Temp files
+all_files.csv
+all_files.py
