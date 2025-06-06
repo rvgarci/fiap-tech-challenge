@@ -25,4 +25,5 @@ def list_historico(db: Session = Depends(get_db)):
     """
     Retorna todos os dados de produção salvos no banco.
     """
-    return db.query(ProductionItemModel).all()
+    return db.query(ProductionItemModel).filter(ProductionItemModel.ano > 0).limit(100).all()
+

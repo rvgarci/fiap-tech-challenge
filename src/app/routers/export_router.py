@@ -27,7 +27,7 @@ def create_scraping_route(suboption: str):
 
 def create_historico_route(suboption: str):
     async def historico_route(db: Session = Depends(get_db)) -> List[ExportItem]:
-        return db.query(ExportItemModel).all()
+        return db.query(ExportItemModel).filter(ExportItemModel.ano > 0).limit(100).all()
     return historico_route
 
 for sub in suboptions:

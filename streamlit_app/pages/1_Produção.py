@@ -2,27 +2,22 @@ import streamlit as st
 import pandas as pd
 import requests
 
-st.set_page_config(page_title="Produção", layout="wide")
 
-st.title("📦 Produção - Histórico de Dados")
+option = "producao"
+title = "Produção"
 
-# Requisição para a API
-st.write("🔄 Buscando dados da API...")
-url = "http://127.0.0.1:8000/embrapa/producao/historico"
+st.set_page_config(page_title=title, layout="wide")
+st.title(f"📦 {option} - Histórico de Dados")
+
+url = f"http://127.0.0.1:8000/embrapa/{option}/historico"
 response = requests.get(url)
 
 if response.status_code == 200:
     data = response.json()
     df = pd.DataFrame(data)
-
-    # Filtros
-    produtos = st.multiselect("Filtrar por produto", df['produto'].unique())
-    if produtos:
-        df = df[df['produto'].isin(produtos)]
-
-    st.dataframe(df, use_container_width=True)
-
-    # Gráfico
-    st.bar_chart(df.groupby("produto")["quantidade_litros"].sum())
+    ano = st.multiselect("Filtrar por ano", df['ano'].unique(), placeholder="Selecione os ano")
+    if ano:
+        df = df[df['ano'].isin(ano)]    
+    st.dataframe(data=df, height=500, use_container_width=True, hide_index=True)
 else:
     st.error(f"Erro ao buscar dados: {response.status_code}")

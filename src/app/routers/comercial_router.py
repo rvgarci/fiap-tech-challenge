@@ -25,4 +25,4 @@ def list_historico(db: Session = Depends(get_db)):
     """
     Retorna todos os dados de comercialização salvos no banco.
     """
-    return db.query(CommercialItemModel).all()
+    return db.query(CommercialItemModel).filter(CommercialItemModel.ano > 0).limit(100).all()
