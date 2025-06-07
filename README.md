@@ -2,6 +2,22 @@
 
 API RESTful desenvolvida com **FastAPI** para realizar scraping dos dados públicos de vitivinicultura da **Embrapa**, estruturá-los e disponibilizá-los por meio de endpoints REST. Os dados são armazenados em um banco de dados local SQLite com potencial para futura integração com modelos de Machine Learning.
 
+---
+
+## 🔗 Links Públicos
+
+### 🌐 API Render (FastAPI)
+
+- https://api-embrapa-fyl8.onrender.com
+- https://api-embrapa-fyl8.onrender.com/docs
+- https://api-embrapa-fyl8.onrender.com/redoc
+
+### 🔓 Repositório GitHub
+
+- https://github.com/rvgarci/fiap-tech-challenge
+
+---
+
 ## 📌 Funcionalidades
 
 - Consulta de dados da Embrapa por ano (1970–2024)
