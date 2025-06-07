@@ -1,4 +1,3 @@
-
 from typing import Type
 from sqlalchemy.orm import Session
 from sqlalchemy.ext.declarative import DeclarativeMeta
@@ -6,7 +5,9 @@ from pydantic import BaseModel
 from app.utils.database_helper import SessionLocal
 
 
-def store_data(items: list[BaseModel], model: Type[DeclarativeMeta], suboption: str = None):
+def store_data(
+    items: list[BaseModel], model: Type[DeclarativeMeta], suboption: str = None
+):
     db: Session = SessionLocal()
     try:
         model_columns = {col.name for col in model.__table__.columns}

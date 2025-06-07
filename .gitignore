@@ -1,36 +1,81 @@
-# Python cache
+# ===============================
+# PYTHON
+# ===============================
+
 **/__pycache__/
 **/*.pyc
 *.py[cod]
 *.pyo
+*.egg-info/
+.poetry/
+.flake8
 
-# Ambiente virtual
+# ===============================
+# AMBIENTE VIRTUAL
+# ===============================
+
 .venv/
 
-# Configs locais
+# ===============================
+# CONFIGURAÇÕES LOCAIS
+# ===============================
+
 .env
 .vscode/
 .backup
 
-# Database
+# ===============================
+# BASES DE DADOS
+# ===============================
+
 *.db
 *.sqlite3
+tests/test.db
 
-# VS Code notebooks metadata
+# ===============================
+# NOTEBOOKS
+# ===============================
+
+*.ipynb
 .ipynb_checkpoints/
 
-# Poetry
-# poetry.lock  # Remova o comentário se quiser versionar o poetry.lock
+# ===============================
+# TESTES / COBERTURA
+# ===============================
 
-# Testes
 .coverage
 htmlcov/
+pytestdebug.log
 
-# Outros
-*.egg-info/
+# ===============================
+# STREAMLIT
+# ===============================
+
+streamlit_app/
+.streamlit/
+
+# ===============================
+# SCRIPTS E SAÍDAS
+# ===============================
+
+.scripts/
+.output/
+
+# ===============================
+# LOGS / TEMPORÁRIOS / BACKUP
+# ===============================
+
 *.log
-*.ipynb
-
-# Temp files
+*.tmp
+*.bak
+*.swp
+*~
 all_files.csv
 all_files.py
+
+# ===============================
+# DOCKER (opcional)
+# ===============================
+
+Dockerfile
+docker-compose.yml

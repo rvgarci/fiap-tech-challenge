@@ -1,5 +1,5 @@
 from typing import Optional
-from app.utils.router_config import ROUTER_CONFIG 
+from app.utils.router_config import ROUTER_CONFIG
 
 
 def get_url(option: str, suboption: Optional[str], year: int) -> str:

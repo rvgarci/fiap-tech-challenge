@@ -1,47 +1,78 @@
-from sqlalchemy import Column, Integer, String, Float
+from sqlalchemy import Column, Float, Integer, String, UniqueConstraint
+
 from app.utils.database_helper import Base
 
 
-class ProductionItemModel(Base): 
-    __tablename__ = "production_items"
+class BaseItemModel(Base):
+    __abstract__ = True
     id = Column(Integer, primary_key=True, index=True)
-    categoria = Column(String, nullable=False)
-    produto = Column(String, nullable=False)
-    quantidade_litros = Column(Integer, nullable=False)
-    ano = Column(Integer)
+    type = Column(String, nullable=False)
+    quantity = Column(Float, nullable=True)
+    unit_of_measure = Column(String, nullable=False)
+    year = Column(Integer, nullable=False)
 
-class ProcessingItemModel(Base):
-    __tablename__ = "processing_items"
 
-    id = Column(Integer, primary_key=True, index=True)
-    tipo = Column(String, nullable=False) 
-    grupo = Column(String, nullable=False)
+class ProductionItemModel(BaseItemModel):
+    __tablename__ = "production_item"
+    __mapper_args__ = {"polymorphic_identity": "production_item"}
+    category = Column(String, nullable=False)
+    product = Column(String, nullable=False)
+    __table_args__ = (
+        UniqueConstraint(
+            "type",
+            "product",
+            "year",
+            name="uq_production_item_type_product_year",
+        ),
+    )
+
+
+class ProcessingItemModel(BaseItemModel):
+    __tablename__ = "processing_item"
+    __mapper_args__ = {"polymorphic_identity": "processing_item"}
+    color = Column(String, nullable=False)
     cultivar = Column(String, nullable=False)
-    quantidade_quilo = Column(Integer, nullable=False)
-    ano = Column(Integer)
+    __table_args__ = (
+        UniqueConstraint("cultivar", "year", name="uq_processing_item_cultivar_year"),
+    )
 
-class CommercialItemModel(Base):
-    __tablename__ = "commercial_items"
-    id = Column(Integer, primary_key=True, index=True)
-    categoria = Column(String, nullable=False)
-    produto = Column(String, nullable=False)
-    quantidade_litros = Column(Integer, nullable=False)
-    ano = Column(Integer)
 
-class ImportItemModel(Base):
-    __tablename__ = "import_items"
-    id = Column(Integer, primary_key=True, index=True)
-    categoria = Column(String, nullable=False)    
-    pais = Column(String, nullable=False)
-    quantidade_quilo = Column(Integer, nullable=True)
-    valor_usd = Column(Float, nullable=True)
-    ano = Column(Integer)
+class CommercialItemModel(BaseItemModel):
+    __tablename__ = "commercial_item"
+    __mapper_args__ = {"polymorphic_identity": "commercial_item"}
+    category = Column(String, nullable=False)
+    product = Column(String, nullable=False)
+    __table_args__ = (
+        UniqueConstraint(
+            "type",
+            "product",
+            "year",
+            name="uq_production_item_type_product_year",
+        ),
+    )
 
-class ExportItemModel(Base):
-    __tablename__ = "export_items"
-    id = Column(Integer, primary_key=True, index=True)
-    categoria = Column(String, nullable=False)    
-    pais = Column(String, nullable=False)
-    quantidade_quilo = Column(Integer, nullable=True)
-    valor_usd = Column(Float, nullable=True)
-    ano = Column(Integer)
+
+class ImportItemModel(BaseItemModel):
+    __tablename__ = "import_item"
+    __mapper_args__ = {"polymorphic_identity": "import_item"}
+    country = Column(String, nullable=False)
+    value = Column(Float, nullable=True)
+    currency = Column(String, nullable=False)
+    __table_args__ = (
+        UniqueConstraint(
+            "type", "country", "year", name="uq_import_item_type_country_year"
+        ),
+    )
+
+
+class ExportItemModel(BaseItemModel):
+    __tablename__ = "export_item"
+    __mapper_args__ = {"polymorphic_identity": "export_item"}
+    country = Column(String, nullable=False)
+    value = Column(Float, nullable=True)
+    currency = Column(String, nullable=False)
+    __table_args__ = (
+        UniqueConstraint(
+            "type", "country", "year", name="uq_import_item_type_country_year"
+        ),
+    )
