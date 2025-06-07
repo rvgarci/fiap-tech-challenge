@@ -24,17 +24,20 @@ API RESTful desenvolvida com **FastAPI** para realizar scraping dos dados públi
 ## 🚀 Como Executar o Projeto
 
 ### 1. Clone o repositório
+
 ```bash
-git clone https://github.com/seu-usuario/fiap-tech-challenge.git 
+git clone https://github.com/seu-usuario/fiap-tech-challenge.git
 cd fiap-tech-challenge
 ```
 
 ### 2. Instale as dependências
+
 ```bash
 poetry install
 ```
 
 ### 3. Execute a aplicação
+
 ```bash
 poetry run uvicorn src.main:app --reload
 ```
@@ -46,20 +49,24 @@ Acesse a documentação interativa em: [http://127.0.0.1:8000/docs](http://127.0
 Todos os endpoints estão sob o prefixo `/embrapa`.
 
 ### 🔹 Produção
+
 - `GET /embrapa/producao?year=2023`
 - `GET /embrapa/producao/historico`
 
 ### 🔹 Processamento
+
 - `GET /embrapa/processamento/viniferas?year=2023`
 - `GET /embrapa/processamento/americanas_e_hibridas?year=2023`
 - `...`
 - `GET /embrapa/processamento/viniferas/historico`
 
 ### 🔹 Comercialização
+
 - `GET /embrapa/comercializacao?year=2023`
 - `GET /embrapa/comercializacao/historico`
 
 ### 🔹 Importação e Exportação
+
 - `GET /embrapa/importacao/uvas_frescas?year=2023`
 - `GET /embrapa/exportacao/sucos_de_uva?year=2023`
 - `...`
@@ -86,6 +93,5 @@ src/
 
 ## 📌 Autor
 
-**Rafael Garcia**  
-rm364717 – FIAP Pós-Tech Machine Learning Engineering  
-[rvgarci@gmail.com](mailto:rvgarci@gmail.com)
+**Rafael Garcia**
+FIAP Pós-Tech Machine Learning Engineering

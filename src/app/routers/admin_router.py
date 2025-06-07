@@ -18,7 +18,7 @@ from app.services.scraper import (
 )
 from app.utils.database_helper import get_db
 
-router = APIRouter(prefix="/admin", tags=["Administrador"])
+router = APIRouter(prefix="/admin", tags=["Administrador"], include_in_schema=False)
 
 
 @router.post("/load_all")
