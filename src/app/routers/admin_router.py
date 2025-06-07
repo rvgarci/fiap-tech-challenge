@@ -17,11 +17,12 @@ from app.services.scraper import (
     get_production_data,
 )
 from app.utils.database_helper import get_db
+from src.app.dependencies.auth import get_admin_token
 
 router = APIRouter(prefix="/admin", tags=["Administrador"], include_in_schema=False)
 
 
-@router.post("/load_all")
+@router.post("/admin/load_all", dependencies=[Depends(get_admin_token)])
 def load_all_data(db: Session = Depends(get_db)):
     anos = [2021, 2022, 2023]
 

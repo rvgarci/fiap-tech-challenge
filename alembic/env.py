@@ -80,3 +80,13 @@ if context.is_offline_mode():
     run_migrations_offline()
 else:
     run_migrations_online()
+
+
+# Exemplo: supondo que estão em src/app/models/
+from app.models.models import (
+    CommercialItemModel,
+    ExportItemModel,
+    ImportItemModel,
+    ProcessingItemModel,
+    ProductionItemModel,
+)
