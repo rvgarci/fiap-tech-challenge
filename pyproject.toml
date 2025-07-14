@@ -28,6 +28,9 @@ blinker = "^1.9.0"
 chardet = "^5.2.0"
 # Removido dotenv e google
 jinja2 = "^3.1.6"
+psycopg2 = "^2.9.10"
+rapidfuzz = "^3.13.0"
+openpyxl = "^3.1.5"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.0.0"

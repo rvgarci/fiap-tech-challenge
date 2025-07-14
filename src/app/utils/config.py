@@ -6,6 +6,7 @@ load_dotenv()
 
 # Detecta ambiente
 ENV = os.getenv("ENV", "local")
+ENV = "development" if ENV == "local" else ENV
 
 # Configura URI do banco com base no ambiente
 if ENV == "production":
