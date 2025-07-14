@@ -47,7 +47,7 @@ class CommercialItemModel(BaseItemModel):
             "type",
             "product",
             "year",
-            name="uq_production_item_type_product_year",
+            name="uq_commercial_item_type_product_year",
         ),
     )
 
@@ -73,6 +73,6 @@ class ExportItemModel(BaseItemModel):
     currency = Column(String, nullable=False)
     __table_args__ = (
         UniqueConstraint(
-            "type", "country", "year", name="uq_import_item_type_country_year"
+            "type", "country", "year", name="uq_export_item_type_country_year"
         ),
     )

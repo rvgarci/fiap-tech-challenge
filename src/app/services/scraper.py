@@ -9,11 +9,20 @@ from app.utils.url_helper import get_url
 
 
 def fetch_table_data(option: str, suboption: Optional[str], year: int, model):
+
     url = get_url(option, suboption, year)
     response = requests.get(url)
+    response.raise_for_status()
     soup = BeautifulSoup(response.text, "html.parser")
     table = soup.find("table", class_="tb_base tb_dados")
-    return parse_table_by_model(table, model, year, suboption)
+
+    if table is None:
+        raise ValueError(f"Tabela não encontrada para {option}/{suboption} ({year})")
+
+    data = parse_table_by_model(table, model, year, suboption)
+    print(f"[DEBUG] Scraping {option}/{suboption} - {year}: {len(data)} registros")
+
+    return data
 
 
 def get_production_data(

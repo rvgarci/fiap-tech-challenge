@@ -6,13 +6,14 @@ load_dotenv()
 
 # Detecta ambiente
 ENV = os.getenv("ENV", "local")
-ENV = "development" if ENV == "local" else ENV
+# ENV = "development" if ENV == "local" else ENV
 
-# Configura URI do banco com base no ambiente
+# Configuração do banco de dados
 if ENV == "production":
     SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL")
 else:
     SQLALCHEMY_DATABASE_URI = "sqlite:///src/app/database/embrapa.db"
+
 
 # Chaves de segurança
 SECRET_KEY = os.getenv("SECRET_KEY", "default_secret")
