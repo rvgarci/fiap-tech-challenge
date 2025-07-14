@@ -3,8 +3,7 @@ from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 
 from app.routers.routers import router
-
-# from app.utils.database_helper import Base, engine
+from app.utils.database_helper import Base, engine
 
 app = FastAPI(
     title="FIAP Tech Challenge - Embrapa API",
@@ -14,7 +13,7 @@ app = FastAPI(
 
 app.include_router(router)
 
-# Base.metadata.create_all(bind=engine)
+Base.metadata.create_all(bind=engine)
 
 templates = Jinja2Templates(directory="src/app/templates")
 
